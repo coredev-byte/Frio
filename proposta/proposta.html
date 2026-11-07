@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Proposta — Site TCLIMA Engenharia Térmica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --night: #060a18; --night2: #0b1226; --brand: #1e6bff; --brand2: #1553d6; --ice: #5fd4ff;
+    --ink: #0f172a; --muted: #5b6475; --line: #e3e8f2; --soft: #f4f7fc;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: Inter, sans-serif; color: var(--ink); font-size: 10.5pt; line-height: 1.55; background: #fff; }
+  h1, h2, h3, .display { font-family: Sora, Inter, sans-serif; }
+  .page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; padding: 15mm 18mm 16mm; }
+  .page:last-child { page-break-after: auto; }
+
+  /* header/footer de página interna */
+  .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7mm; }
+  .top .brand { display: flex; align-items: center; gap: 8px; font-family: Sora; font-weight: 800; font-style: italic; font-size: 11pt; }
+  .top .brand img { width: 26px; height: 26px; border-radius: 50%; }
+  .top .brand b { color: var(--brand); }
+  .top .num { font-size: 8.5pt; color: var(--muted); letter-spacing: .14em; text-transform: uppercase; }
+  .foot { position: absolute; left: 18mm; right: 18mm; bottom: 9mm; display: flex; justify-content: space-between; font-size: 8pt; color: #98a1b3; border-top: 1px solid var(--line); padding-top: 3mm; }
+
+  .eyebrow { display: inline-block; font-size: 8pt; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--brand); margin-bottom: 2.5mm; }
+  h2 { font-size: 22pt; line-height: 1.15; letter-spacing: -.01em; margin-bottom: 4mm; }
+  h3 { font-size: 11.5pt; margin-bottom: 1.5mm; }
+  p.lead { font-size: 11.5pt; color: #334155; max-width: 160mm; }
+  .muted { color: var(--muted); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
+  .card { border: 1px solid var(--line); border-radius: 4mm; padding: 5mm; background: #fff; }
+  .card.soft { background: var(--soft); border-color: transparent; }
+  .ico { width: 9mm; height: 9mm; border-radius: 2.5mm; display: grid; place-items: center; background: #e8f0ff; color: var(--brand); font-weight: 800; font-family: Sora; font-size: 10pt; margin-bottom: 3mm; }
+  ul.check { list-style: none; }
+  ul.check li { padding-left: 6mm; position: relative; margin: 1.6mm 0; }
+  ul.check li::before { content: ""; position: absolute; left: 0; top: 1.7mm; width: 3mm; height: 3mm; border-radius: 50%; background: var(--brand); box-shadow: inset 0 0 0 .8mm #cfe0ff; }
+  ul.x li::before { background: #cbd5e1; box-shadow: none; }
+
+  /* CAPA */
+  .cover { background: radial-gradient(ellipse at 70% 0%, rgba(30,107,255,.45), transparent 60%), radial-gradient(ellipse at 0% 100%, rgba(95,212,255,.18), transparent 55%), var(--night); color: #fff; padding: 22mm 20mm; }
+  .cover .grid-bg { position: absolute; inset: 0; opacity: .07; background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 12mm 12mm; }
+  .cover .logo { display: block; width: 34mm; height: 34mm; border-radius: 50%; box-shadow: 0 0 0 1.2mm rgba(255,255,255,.08), 0 10mm 30mm rgba(30,107,255,.5); }
+  .cover .tag { display: inline-block; margin-top: 26mm; padding: 1.6mm 4mm; border: 1px solid rgba(95,212,255,.4); background: rgba(95,212,255,.1); color: #9ce7ff; border-radius: 99px; font-size: 8.5pt; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+  .cover h1 { font-size: 38pt; line-height: 1.05; margin-top: 7mm; letter-spacing: -.02em; }
+  .cover h1 span { color: #7cc4ff; }
+  .cover .sub { margin-top: 6mm; font-size: 13pt; color: #b8c3da; max-width: 140mm; }
+  .cover .shot { position: absolute; right: -26mm; bottom: 36mm; width: 140mm; border-radius: 4mm; border: 1px solid rgba(255,255,255,.15); box-shadow: 0 20mm 40mm rgba(0,0,0,.5); transform: rotate(-4deg); }
+  .cover .meta { position: absolute; left: 20mm; right: 20mm; bottom: 18mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; border-top: 1px solid rgba(255,255,255,.12); padding-top: 6mm; }
+  .cover .meta small { display: block; font-size: 7.5pt; letter-spacing: .16em; text-transform: uppercase; color: #7f8bab; margin-bottom: 1mm; }
+  .cover .meta b { font-size: 10.5pt; }
+
+  /* funil */
+  .flow { display: grid; grid-template-columns: 1fr 6mm 1fr 6mm 1fr 6mm 1fr; align-items: stretch; margin-top: 5mm; }
+  .flow .st { border-radius: 3.5mm; padding: 4mm 3.5mm; background: var(--soft); text-align: center; }
+  .flow .st b { display: block; font-family: Sora; font-size: 10pt; margin-bottom: 1mm; }
+  .flow .st span { font-size: 8.5pt; color: var(--muted); line-height: 1.4; display: block; }
+  .flow .st.hl { background: linear-gradient(135deg, var(--brand2), var(--brand)); color: #fff; }
+  .flow .st.hl span { color: #dbe7ff; }
+  .flow .st.wa { background: #e7f9ee; }
+  .flow .ar { display: grid; place-items: center; color: var(--brand); font-weight: 800; }
+
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 6mm; }
+  .compare .card h3 { display: flex; align-items: center; gap: 2mm; }
+  .pill { font-size: 7.5pt; font-weight: 700; padding: .6mm 2.4mm; border-radius: 99px; letter-spacing: .06em; }
+  .pill.gray { background: #eef1f6; color: #64748b; }
+  .pill.blue { background: #e3edff; color: var(--brand2); }
+
+  /* prévia */
+  .linkbox { display: flex; align-items: center; gap: 4mm; background: var(--night); color: #fff; border-radius: 4mm; padding: 4mm 5mm; margin: 4mm 0 6mm; }
+  .linkbox .badge { background: #fbbf24; color: #3b2a00; font-weight: 800; font-size: 7.5pt; letter-spacing: .12em; padding: 1mm 2.5mm; border-radius: 99px; white-space: nowrap; }
+  .linkbox a { color: #9ce7ff; font-weight: 700; font-size: 12pt; text-decoration: none; font-family: Sora; }
+  .linkbox small { display: block; color: #8d98b3; font-size: 8pt; margin-top: .5mm; }
+  .browser { border-radius: 3mm; overflow: hidden; border: 1px solid #d5dbe7; box-shadow: 0 4mm 10mm rgba(15,23,42,.12); background: #fff; }
+  .browser .bar { height: 5mm; background: #eef1f6; display: flex; align-items: center; gap: 1.2mm; padding-left: 2.5mm; }
+  .browser .bar i { width: 1.8mm; height: 1.8mm; border-radius: 50%; background: #cbd5e1; display: block; }
+  .browser img { display: block; width: 100%; }
+  .browser.crop img { height: 36mm; object-fit: cover; object-position: top; }
+  .phone { border-radius: 7mm; padding: 2mm; background: #0b1226; box-shadow: 0 4mm 12mm rgba(15,23,42,.3); }
+  .phone img { display: block; width: 100%; border-radius: 5.5mm; }
+  .preview { display: grid; grid-template-columns: 1fr 40mm; gap: 6mm; align-items: center; }
+  .feat { display: grid; grid-template-columns: 1fr 1fr; gap: 0 6mm; margin-top: 4mm; font-size: 9.5pt; }
+
+  /* marketing */
+  .mk { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5mm; margin-top: 4mm; }
+  .mk .card { padding: 4mm 4.5mm; }
+  .mk .card p { font-size: 9pt; line-height: 1.45; color: #475569; }
+  .season { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 4mm; border-radius: 3.5mm; overflow: hidden; border: 1px solid var(--line); }
+  .season div { padding: 3.5mm 4mm; font-size: 9pt; }
+  .season div + div { border-left: 1px solid var(--line); }
+  .season b { display: block; font-family: Sora; font-size: 9.5pt; margin-bottom: .8mm; }
+  .season small { display: block; color: var(--brand); font-weight: 700; font-size: 7.5pt; letter-spacing: .1em; text-transform: uppercase; }
+
+  /* investimento */
+  .price { border-radius: 5mm; padding: 5.5mm 7mm; color: #fff; background: radial-gradient(ellipse at 100% 0%, rgba(95,212,255,.35), transparent 55%), linear-gradient(135deg, #0b1226, #1553d6); display: grid; grid-template-columns: 1fr 1.15fr; gap: 8mm; align-items: center; }
+  .price .val { font-family: Sora; font-weight: 800; font-size: 44pt; line-height: 1; letter-spacing: -.02em; }
+  .price .val sup { font-size: 16pt; vertical-align: top; margin-right: 1mm; position: relative; top: 2mm; }
+  .price .once { display: inline-block; margin-top: 3mm; background: rgba(255,255,255,.14); padding: 1mm 3mm; border-radius: 99px; font-size: 8.5pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .price ul.check li { margin: 1.3mm 0; font-size: 10pt; }
+  .price ul.check li::before { background: var(--ice); box-shadow: inset 0 0 0 .8mm #0b3d6e; }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; margin-top: 4mm; }
+  .steps div { border-top: 1.2mm solid var(--brand); padding-top: 3mm; font-size: 9pt; color: #475569; }
+  .steps b { display: block; color: var(--ink); font-family: Sora; font-size: 10pt; margin-bottom: 1mm; }
+  .note { font-size: 8pt; color: #8a93a6; margin-top: 3mm; }
+</style>
+</head>
+<body>
+
+<!-- ============ 1. CAPA ============ -->
+<section class="page cover">
+  <div class="grid-bg"></div>
+  <img class="logo" src="img/logo.png" alt="TCLIMA" />
+  <div class="tag">Proposta comercial</div>
+  <h1 class="display">Site profissional<br/><span>TCLIMA Engenharia Térmica</span></h1>
+  <p class="sub">Um site rápido, moderno e pronto para transformar buscas no Google em conversas no WhatsApp.</p>
+  <img class="shot" src="img/desk-hero.jpg" alt="Prévia do site" />
+  <div class="meta">
+    <div><small>Preparado para</small><b>TCLIMA Engenharia Térmica</b></div>
+    <div><small>Data</small><b>07/11/2026</b></div>
+    <div><small>Validade da proposta</small><b>15 dias</b></div>
+  </div>
+</section>
+
+<!-- ============ 2. RACIOCÍNIO ============ -->
+<section class="page">
+  <div class="top"><div class="brand"><img src="img/logo.png" alt="" /><span><b>T</b>CLIMA</span></div><div class="num">01 · Linha de raciocínio</div></div>
+
+  <span class="eyebrow">O cenário hoje</span>
+  <h2>O Instagram mostra o trabalho.<br/>O site faz o cliente novo chegar.</h2>
+  <p class="lead">A TCLIMA já tem um bom ativo: mais de 1.100 seguidores, uniforme, identidade visual forte e atendimento rápido no WhatsApp. O ponto é que o Instagram depende de quem <b>já segue</b> a página. Quem pesquisa no Google <i>“limpeza de ar-condicionado perto de mim”</i> hoje não encontra a TCLIMA e acaba fechando com o concorrente que aparece primeiro.</p>
+
+  <div class="compare">
+    <div class="card soft">
+      <h3>Hoje <span class="pill gray">só Instagram</span></h3>
+      <ul class="check x">
+        <li>Alcance limitado a seguidores e algoritmo</li>
+        <li>Não aparece nas pesquisas do Google</li>
+        <li>Empresas e síndicos pedem site antes de contratar</li>
+        <li>Sem base para anunciar no Google Ads</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Com o site <span class="pill blue">vitrine 24h</span></h3>
+      <ul class="check">
+        <li>Aparece no Google para quem já quer contratar</li>
+        <li>Passa credibilidade para residências e empresas</li>
+        <li>Cada visita vira conversa no WhatsApp em 1 toque</li>
+        <li>Página de destino ideal para os anúncios</li>
+      </ul>
+    </div>
+  </div>
+
+  <span class="eyebrow" style="margin-top:9mm">Como o site gera clientes</span>
+  <h3 style="font-size:14pt">O caminho do cliente, do Google ao orçamento</h3>
+  <div class="flow">
+    <div class="st"><b>1. Busca</b><span>“instalação de ar-condicionado” no Google ou anúncio</span></div>
+    <div class="ar">→</div>
+    <div class="st hl"><b>2. Site TCLIMA</b><span>Serviços, diferenciais e prova de trabalho real</span></div>
+    <div class="ar">→</div>
+    <div class="st wa"><b>3. WhatsApp</b><span>Botão flutuante com mensagem pronta por serviço</span></div>
+    <div class="ar">→</div>
+    <div class="st"><b>4. Orçamento</b><span>A TCLIMA já recebe o pedido sabendo o que o cliente quer</span></div>
+  </div>
+
+  <div class="grid3" style="margin-top:8mm">
+    <div class="card"><div class="ico">1</div><h3>Ser encontrado</h3><p class="muted" style="font-size:9.5pt">Site indexado no Google e otimizado para as buscas da região.</p></div>
+    <div class="card"><div class="ico">2</div><h3>Convencer</h3><p class="muted" style="font-size:9.5pt">Design profissional, fotos reais da equipe e linguagem clara.</p></div>
+    <div class="card"><div class="ico">3</div><h3>Converter</h3><p class="muted" style="font-size:9.5pt">Menos passos até o WhatsApp = mais orçamentos pedidos.</p></div>
+  </div>
+
+  <div class="foot"><span>Proposta · Site TCLIMA Engenharia Térmica</span><span>2</span></div>
+</section>
+
+<!-- ============ 3. PRÉVIA ============ -->
+<section class="page">
+  <div class="top"><div class="brand"><img src="img/logo.png" alt="" /><span><b>T</b>CLIMA</span></div><div class="num">02 · Prévia do site</div></div>
+
+  <span class="eyebrow">Já está pronto para você ver</span>
+  <h2>Prévia funcionando</h2>
+  <p class="lead">Desenvolvemos uma versão do site para a TCLIMA avaliar antes de decidir. Abra no celular e teste o botão do WhatsApp. Textos e fotos são provisórios e serão trocados pelo material real da TCLIMA.</p>
+
+  <div class="linkbox">
+    <span class="badge">LINK DE TESTE</span>
+    <div>
+      <a href="https://tclima-engenharia.vercel.app">tclima-engenharia.vercel.app</a>
+      <small>Endereço provisório apenas para avaliação. Na entrega o site vai para o domínio próprio da TCLIMA (ex.: tclima.com.br).</small>
+    </div>
+  </div>
+
+  <div class="preview">
+    <div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="img/desk-hero.jpg" alt="Página inicial" /></div>
+    <div class="phone"><img src="img/mob.jpg" alt="Versão celular" /></div>
+  </div>
+
+  <div class="grid2" style="margin-top:5mm">
+    <div class="browser crop"><div class="bar"><i></i><i></i><i></i></div><img src="img/desk-servicos.jpg" alt="Serviços" /></div>
+    <div class="browser crop"><div class="bar"><i></i><i></i><i></i></div><img src="img/desk-sinais.jpg" alt="Sinais de manutenção" /></div>
+  </div>
+
+  <ul class="check feat">
+    <li><b>Botão flutuante do WhatsApp</b> com mensagem automática</li>
+    <li>Cada serviço abre o WhatsApp com <b>mensagem específica</b></li>
+    <li>Animações modernas e leves (React + Framer Motion)</li>
+    <li>Perfeito no celular, onde estão 80%+ dos acessos</li>
+    <li>Carregamento rápido e hospedagem sem mensalidade</li>
+    <li>SEO técnico: dados estruturados, títulos e descrições</li>
+  </ul>
+
+  <div class="foot"><span>Proposta · Site TCLIMA Engenharia Térmica</span><span>3</span></div>
+</section>
+
+<!-- ============ 4. MARKETING ============ -->
+<section class="page">
+  <div class="top"><div class="brand"><img src="img/logo.png" alt="" /><span><b>T</b>CLIMA</span></div><div class="num">03 · Estratégia de marketing</div></div>
+
+  <span class="eyebrow">Além do site</span>
+  <h2>Como vamos trazer clientes</h2>
+  <p class="lead">O site é a base. Em volta dele, montamos uma estratégia simples, de baixo custo e focada em quem já está procurando o serviço.</p>
+
+  <div class="mk">
+    <div class="card"><div class="ico">G</div><h3>Indexação e SEO local</h3><p>Cadastro no Google Search Console, envio do sitemap e textos pensados para buscas como “higienização de ar-condicionado + cidade”. O site aparece nas pesquisas orgânicas, sem pagar por clique.</p></div>
+    <div class="card"><div class="ico">Ads</div><h3>Google Ads (parceria)</h3><p>Campanha de pesquisa segmentada pela região de atendimento, com palavras de alta intenção (“instalar ar-condicionado”, “ar pingando”). Quem clica cai direto no site e no WhatsApp. Verba sugerida a partir de R$ 15/dia, paga direto ao Google.</p></div>
+    <div class="card"><div class="ico">📍</div><h3>Perfil da Empresa no Google</h3><p>Perfil no Google Maps otimizado e ligado ao site: horário, fotos, serviços e botão de contato. É o que aparece no “perto de mim”.</p></div>
+    <div class="card"><div class="ico">★</div><h3>Avaliações como motor</h3><p>A TCLIMA já usa QR Code de avaliação. Vamos direcionar essas avaliações para o Google: mais estrelas = melhor posição no Maps e mais confiança.</p></div>
+    <div class="card"><div class="ico">IG</div><h3>Instagram + site</h3><p>Link do site na bio e nos destaques; conteúdos de antes/depois da higienização levam ao botão de orçamento. Um canal alimenta o outro.</p></div>
+    <div class="card"><div class="ico">B2B</div><h3>Empresas e PMOC</h3><p>Seção específica para comércios, escritórios e clínicas: contratos de manutenção recorrente, que dão receita previsível o ano todo.</p></div>
+  </div>
+
+  <h3 style="margin-top:5mm;font-size:12pt">Calendário de campanhas</h3>
+  <div class="season">
+    <div><small>Ago — Nov</small><b>Pré-verão</b>Instalação e higienização antes do calor. Melhor época para anunciar.</div>
+    <div><small>Dez — Mar</small><b>Pico do calor</b>Manutenção corretiva e urgências (“ar não gela”). Anúncios por região.</div>
+    <div><small>Abr — Jul</small><b>Baixa temporada</b>Higienização contra rinite e contratos com empresas (PMOC).</div>
+  </div>
+
+  <div class="foot"><span>Proposta · Site TCLIMA Engenharia Térmica</span><span>4</span></div>
+</section>
+
+<!-- ============ 5. INVESTIMENTO ============ -->
+<section class="page">
+  <div class="top"><div class="brand"><img src="img/logo.png" alt="" /><span><b>T</b>CLIMA</span></div><div class="num">04 · Investimento</div></div>
+
+  <span class="eyebrow">Investimento</span>
+  <h2>Simples, sem mensalidade</h2>
+
+  <div class="price">
+    <div>
+      <div class="val"><sup>R$</sup>450</div>
+      <div class="once">Pagamento único</div>
+      <p style="margin-top:4mm;color:#c9d6f2;font-size:10pt">Site entregue pronto, publicado e indexado. Sem mensalidade de manutenção.</p>
+    </div>
+    <ul class="check">
+      <li>Site completo com animações, responsivo (celular, tablet e PC)</li>
+      <li>Botão flutuante do WhatsApp com mensagem automática</li>
+      <li>Publicação + indexação no Google (aparecer nas pesquisas)</li>
+      <li>Parceria Google Ads: estruturação da conta e campanha inicial</li>
+      <li>Hospedagem rápida e segura (HTTPS), sem custo mensal</li>
+      <li><b>Suporte all-time</b> incluso</li>
+    </ul>
+  </div>
+
+  <div class="grid2" style="margin-top:5mm">
+    <div class="card">
+      <h3>Suporte all-time</h3>
+      <p class="muted" style="font-size:9.5pt;margin-bottom:2mm">Pequenos ajustes no dia a dia <b>sem custo</b>, para sempre:</p>
+      <ul class="check" style="font-size:9.5pt">
+        <li>Troca de textos, fotos, telefone e serviços</li>
+        <li>Correções e atualizações técnicas</li>
+        <li>Ajuda com Google e anúncios</li>
+      </ul>
+      <p class="muted" style="font-size:8.5pt;margin-top:2mm">Somente <b>grandes alterações</b> (novas páginas, novas funcionalidades ou redesign completo) são orçadas à parte.</p>
+    </div>
+    <div class="card soft">
+      <h3>Por conta do cliente</h3>
+      <ul class="check x" style="font-size:9.5pt">
+        <li><b>Domínio próprio</b> (ex.: tclima.com.br), registrado no nome da TCLIMA no Registro.br, cerca de R$ 40/ano</li>
+        <li><b>Verba dos anúncios</b> do Google Ads, paga direto ao Google e definida pela TCLIMA (pode pausar quando quiser)</li>
+        <li>Envio de fotos, logo em boa qualidade e informações da empresa</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:5mm;font-size:12pt">Próximos passos</h3>
+  <div class="steps">
+    <div><b>1. Aprovação</b>Retorno sobre a prévia e o “ok” para seguir.</div>
+    <div><b>2. Material</b>Fotos, cidades atendidas e ajustes de texto.</div>
+    <div><b>3. Publicação</b>Domínio próprio, Google e Perfil da Empresa.</div>
+    <div><b>4. Anúncios</b>Campanha Google Ads no ar e acompanhamento.</div>
+  </div>
+
+  <div class="card" style="margin-top:4.5mm;display:flex;align-items:center;gap:5mm;background:var(--night);border:0;color:#fff">
+    <img src="img/logo.png" alt="" style="width:16mm;height:16mm;border-radius:50%" />
+    <div style="flex:1">
+      <b class="display" style="font-size:12pt">Vamos colocar a TCLIMA no Google?</b>
+      <p style="color:#aeb9d2;font-size:9.5pt">Teste a prévia em <span style="color:#9ce7ff;font-weight:700">tclima-engenharia.vercel.app</span> e responda esta proposta para iniciarmos.</p>
+    </div>
+  </div>
+  <p class="note">Proposta válida por 15 dias a partir de 07/11/2026. Estimativas de economia de energia e de verba de anúncios são referências de mercado e podem variar.</p>
+
+  <div class="foot"><span>Proposta · Site TCLIMA Engenharia Térmica</span><span>5</span></div>
+</section>
+
+</body>
+</html>

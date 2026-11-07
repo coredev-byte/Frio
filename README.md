@@ -15,3 +15,8 @@ npm run build   # gera /dist (deploy na Vercel)
 ```
 
 Para trocar o número ou a mensagem padrão, edite `src/config.js`.
+
+## Proposta comercial
+
+`proposta/Proposta-Site-TCLIMA.pdf` — gerada a partir de `proposta/proposta.html`
+(Chromium/Playwright, A4). Para regenerar após editar o HTML, imprima em PDF com fundo ativado.
